@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import *
 # Create your views here.
 
 def index(request):
@@ -10,3 +11,19 @@ def about(request):
 
 def fun1(request):
     return HttpResponse('ye prem ka response hai')
+
+def create_row(request):
+    Buyer.objects.create(
+        first_name = 'prem',
+        last_name = 'rakh',
+        email = 'pre@gmail.com',
+        password = 'prem1234',
+        address = '176, vishnunagar, udhna, surat',
+        gender = 'male'
+    )
+    return HttpResponse('row create ho gaya')
+
+def delete_row(request):
+    d_row = Buyer.objects.get(email = 'pre@gmail.com')
+    d_row.delete()
+    return HttpResponse('delete ho gya')
