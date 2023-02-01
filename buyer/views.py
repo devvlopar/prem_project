@@ -14,12 +14,12 @@ def fun1(request):
 
 def create_row(request):
     Buyer.objects.create(
-        first_name = 'prem',
-        last_name = 'rakh',
-        email = 'pre@gmail.com',
+        first_name = 'devang',
+        last_name = 'singh',
+        email = 'dev@gmail.com',
         password = 'prem1234',
         address = '176, vishnunagar, udhna, surat',
-        gender = 'male'
+        gender = 'yudasg'
     )
     return HttpResponse('row create ho gaya')
 
@@ -27,3 +27,6 @@ def delete_row(request):
     d_row = Buyer.objects.get(email = 'pre@gmail.com')
     d_row.delete()
     return HttpResponse('delete ho gya')
+
+def faqs(request):
+    return render(request, 'faqs.html')

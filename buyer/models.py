@@ -14,3 +14,6 @@ class Buyer(models.Model):
     password = models.CharField(max_length=100)
     address = models.CharField(max_length=150)
     gender = models.CharField(choices=all_genders, max_length=20)
+
+    def __str__(self):
+        return self.first_name

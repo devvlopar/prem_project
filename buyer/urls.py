@@ -6,6 +6,8 @@ urlpatterns = [
     path('about/', about, name="about"),
     path('create_row/', create_row, name="create_row"),
     path('delete_row/', delete_row, name="delete_row"),
+    path('faqs/', faqs, name="faqs"),
+
 
 
     
