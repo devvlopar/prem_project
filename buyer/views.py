@@ -30,3 +30,17 @@ def delete_row(request):
 
 def faqs(request):
     return render(request, 'faqs.html')
+
+def register(request):
+    if request.method == 'GET':
+        return render(request, 'register.html')
+    else:
+        Buyer.objects.create(
+            #POST['first_name'] : ye key register.html ke form mein
+            #  <input> tag mein name="first_name"
+            first_name = request.POST['first_name'],
+            last_name = request.POST['last_name'],
+            email = request.POST['email'],
+            password = request.POST['password']
+        )
+        return render(request, 'register.html', {"mprr":'Created Successfully'})
