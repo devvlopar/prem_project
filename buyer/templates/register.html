@@ -44,7 +44,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             
             <form action="{% url 'register' %}" method="post">
                 {% csrf_token %}
-                {{mprr}}
+                {{msg}}
                 <div class="styled-input agile-styled-input-top">
                     <input type="text" placeholder="First Name" name="first_name" required="">
                 </div>

@@ -35,6 +35,13 @@ def register(request):
     if request.method == 'GET':
         return render(request, 'register.html')
     else:
+        try:
+            user_obj = Buyer.objects.get(email = request.POST['email'])
+            return render(request, 'register.html',{'msg': 'Email Already Exists'})
+        except:
+            return HttpResponse('OTP bhejunga')
+
+
         Buyer.objects.create(
             #POST['first_name'] : ye key register.html ke form mein
             #  <input> tag mein name="first_name"
