@@ -4,7 +4,12 @@ from .models import *
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html')
+    try:
+        user_obj = Buyer.objects.get(email = request.session['buyer_email'])
+        return render(request, 'index.html', {'user_data': user_obj })
+
+    except:
+        return render(request, 'index.html')
 
 def about(request):
     return render(request, 'about.html')
@@ -42,6 +47,8 @@ def register(request):
             return HttpResponse('OTP bhejunga')
 
 
+def otp(request):
+
         Buyer.objects.create(
             #POST['first_name'] : ye key register.html ke form mein
             #  <input> tag mein name="first_name"
@@ -51,3 +58,24 @@ def register(request):
             password = request.POST['password']
         )
         return render(request, 'register.html', {"mprr":'Created Successfully'})
+
+def cart(request):
+    return render(request, 'cart.html')
+
+
+def login(request):
+    if request.method == 'GET':
+        return render(request, 'login.html')
+    else:
+        try:
+            user_obj = Buyer.objects.get(email = request.POST['email'])
+            if request.POST['password'] == user_obj.password:
+                #nayi key value pair de rha hu
+                request.session['buyer_email'] = request.POST['email']
+                return render(request, 'index.html', {'user_data':user_obj})
+        except:
+            return render(request, 'login.html', {'msg': 'Email Is Not Registered!!'})
+
+
+def logout(request):
+    pass
