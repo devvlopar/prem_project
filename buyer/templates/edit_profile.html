@@ -40,25 +40,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <span class="fa fa-envelope-o" aria-hidden="true"></span>
         </div>
         <div class="modal_body_left modal_body_left1">
-            <h3 class="agileinfo_sign">Login Now</h3>
+            <h3 class="agileinfo_sign">Edit Profile</h3>
             
-            <form action="{% url 'login' %}" method="post">
+            <form action="{% url 'edit_profile' %}" method="post">
                 {% csrf_token %}
                 {{msg}}
-                
-                
+                <div class="styled-input agile-styled-input-top">
+                    <input type="text" placeholder="First Name" name="first_name" value="{{buyer_data.first_name}}" required="">
+                </div>
+                <div class="styled-input agile-styled-input-top">
+                    <input type="text" placeholder="Last Name" name="last_name" value="{{buyer_data.last_name}}" required="">
+                </div>
                 <div class="styled-input"> 
-                    <input type="email" placeholder="E-mail" name="email" required="">
+                    <input type="email" placeholder="E-mail" name="email" value="{{buyer_data.email}}" disabled>
                 </div>
                 <div class="styled-input">
-                    <input type="password" placeholder="Password" name="password" id="password1" required="">
+                    <input type="text" placeholder="Address" name="address" value="{{buyer_data.address}}" required="">
                 </div>
-               
-                <input type="submit" value="LogIn">
+                <div class="styled-input">
+                    <input type="text" placeholder="Gender" name="gender" value="{{buyer_data.gender}}" required="">
+                </div>
+                <input type="submit" value="Save">
             </form>
             
         </div>
-        <p><a href="{% url 'forgot_password' %}" >Forgot Password??</a></p>
     </div>
 </div>
 

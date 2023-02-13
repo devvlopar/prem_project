@@ -70,7 +70,7 @@ def login(request):
         try:
             user_obj = Buyer.objects.get(email = request.POST['email'])
             if request.POST['password'] == user_obj.password:
-                #nayi key value pair de rha hu
+                #nayi key value pair de rha hu, matbal LOGIN KAR RAHA hu
                 request.session['buyer_email'] = request.POST['email']
                 return render(request, 'index.html', {'user_data':user_obj})
         except:
@@ -78,4 +78,25 @@ def login(request):
 
 
 def logout(request):
-    pass
+    del request.session['buyer_email']
+    return render(request, 'login.html')
+
+def edit_profile(request):
+    b_obj = Buyer.objects.get(email = request.session['buyer_email'])
+    if request.method == 'GET':
+        return render(request, 'edit_profile.html', {'buyer_data':b_obj})
+    else:
+        b_obj.first_name = request.POST['first_name']
+        b_obj.last_name = request.POST['last_name']
+        b_obj.address = request.POST['address']
+        b_obj.gender = request.POST['gender']
+        b_obj.save() #ye method call karne se database mein actual change hoga
+        return render(request, 'edit_profile.html', {'msg': 'Successfully Updated!!', 'buyer_data':b_obj})
+
+
+def forgot_password(request):
+    if request.method == 'GET':
+        return render(request, 'forgot_password.html')
+    else:
+        #ye email pe YE EMAIL KA password send kar do
+        request.POST['email']
