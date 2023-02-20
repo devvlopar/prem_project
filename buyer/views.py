@@ -1,15 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
+from seller.models import *
 # Create your views here.
 
 def index(request):
+    all_products = Product.objects.all()
     try:
         user_obj = Buyer.objects.get(email = request.session['buyer_email'])
-        return render(request, 'index.html', {'user_data': user_obj })
-
+        return render(request, 'index.html', {'user_data': user_obj, 'all_pros':all_products})
     except:
-        return render(request, 'index.html')
+        return render(request, 'index.html', {'all_pros': all_products})
 
 def about(request):
     return render(request, 'about.html')
@@ -72,7 +73,7 @@ def login(request):
             if request.POST['password'] == user_obj.password:
                 #nayi key value pair de rha hu, matbal LOGIN KAR RAHA hu
                 request.session['buyer_email'] = request.POST['email']
-                return render(request, 'index.html', {'user_data':user_obj})
+                return redirect('index')
         except:
             return render(request, 'login.html', {'msg': 'Email Is Not Registered!!'})
 

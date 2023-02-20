@@ -29,8 +29,9 @@ def seller_logout(request):
 
 
 def add_product(request):
+    s_obj = Seller.objects.get(email = request.session['seller_email'])
     if request.method == 'GET':
-        return render(request, 'add_product.html')
+        return render(request, 'add_product.html', {'seller_data': s_obj})
     else:
         Product.objects.create(
             product_name = request.POST['product_name'],
@@ -39,4 +40,4 @@ def add_product(request):
             product_stock = request.POST['product_stock'],
             pic = request.FILES['pic']
         )
-        return render(request, 'add_product.html', {'msg': 'Product Successfully Added!'})
+        return render(request, 'add_product.html', {'msg': 'Product Successfully Added!', 'seller_data': s_obj})

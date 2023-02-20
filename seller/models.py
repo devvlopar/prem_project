@@ -7,6 +7,8 @@ class Seller(models.Model):
     address = models.CharField(max_length= 50)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=50)
+    pic = models.FileField(upload_to='seller_pics', default='sad.jpeg')
+
     
     def __str__(self):
         return self.full_name
