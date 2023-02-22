@@ -20,4 +20,5 @@ class Product(models.Model):
     price = models.FloatField(default=10.0)
     product_stock = models.IntegerField(default=0)
     pic = models.FileField(upload_to='product_pics', default='sad.jpeg')
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
     

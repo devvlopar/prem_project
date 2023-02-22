@@ -6,6 +6,8 @@ urlpatterns = [
     path('seller_login/', seller_login, name="seller_login"),
     path('seller_logout/', seller_logout, name="seller_logout"),
     path('add_product/', add_product, name="add_product"),
+    path('my_products/', my_products, name="my_products"),
+
 
 
    

@@ -38,6 +38,14 @@ def add_product(request):
             des = request.POST['des'],
             price = request.POST['price'],
             product_stock = request.POST['product_stock'],
-            pic = request.FILES['pic']
+            pic = request.FILES['pic'],
+            seller = s_obj
         )
         return render(request, 'add_product.html', {'msg': 'Product Successfully Added!', 'seller_data': s_obj})
+    
+def my_products(request):
+    s_obj = Seller.objects.get(email = request.session['seller_email'])
+    #FOREIGN KEY WALI FIELD HOTI HATO HAI TO 
+    # OBJECT deni hai
+    my_pros = Product.objects.filter(seller= s_obj)
+    return render(request, 'my_products.html', {'seller_data':s_obj, 'my_products':my_pros})

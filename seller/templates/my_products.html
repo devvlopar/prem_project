@@ -64,39 +64,40 @@
                   </tr>
               </thead>
               <tbody>
-                {% for single_product in seller_products %}
+
+                {% for i in my_products %}
                 <tr>
                       <td>
-                          {{single_product.product_name}}
-                      </td>
+                        {{i.product_name}}
+                    </td>
                       <td class="project_progress">
-                        {{single_product.des}}
+                        {{i.des}}
                     </td>
                       <td>
                           <ul class="list-inline">
                               
                               
                               <li class="list-inline-item">
-                                  <img alt="Avatar" width="30px" class="table-avatar" src="{{single_product.pic.url}}">
+                                  <img alt="Avatar" width="30px" class="table-avatar" src="{{i.pic.url}}">
                               </li>
                           </ul>
                       </td>
                       
                       <td class="project-state">
-                          ${{single_product.price}}
+                          ${{i.price}}
                       </td>
                       <td class="project-state">
-                        ${{single_product.product_stock}}
+                       {{i.product_stock}}
                     </td>
 
                       <td class="project-actions ">
                           
-                          <a class="btn btn-info btn-sm" href="{% url 'edit_product' single_product.id %}">
+                          <a class="btn btn-info btn-sm" href="">
                               <i class="fas fa-pencil-alt">
                               </i>
                               Edit
                           </a>
-                          <a class="btn btn-danger btn-sm" href="{% url 'delete_product' single_product.id %}">
+                          <a class="btn btn-danger btn-sm" href="">
                               <i class="fas fa-trash">
                               </i>
                               Delete
@@ -104,7 +105,6 @@
                       </td>
                 </tr>
                 {% endfor %}
-                
               </tbody>
           </table>
         </div>
