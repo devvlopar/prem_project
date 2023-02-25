@@ -49,3 +49,10 @@ def my_products(request):
     # OBJECT deni hai
     my_pros = Product.objects.filter(seller= s_obj)
     return render(request, 'my_products.html', {'seller_data':s_obj, 'my_products':my_pros})
+
+
+#Add to cart & payment
+# Live / Deploy github
+# REST API
+# AJAX
+# GUI

@@ -60,8 +60,6 @@ def otp(request):
         )
         return render(request, 'register.html', {"mprr":'Created Successfully'})
 
-def cart(request):
-    return render(request, 'cart.html')
 
 
 def login(request):
@@ -74,6 +72,8 @@ def login(request):
                 #nayi key value pair de rha hu, matbal LOGIN KAR RAHA hu
                 request.session['buyer_email'] = request.POST['email']
                 return redirect('index')
+            else:
+                return render(request, 'login.html', {'msg':'Invalid Credintials'})
         except:
             return render(request, 'login.html', {'msg': 'Email Is Not Registered!!'})
 
@@ -101,3 +101,35 @@ def forgot_password(request):
     else:
         #ye email pe YE EMAIL KA password send kar do
         request.POST['email']
+
+
+def add_to_cart(request, pk):
+    try:
+        b_obj = Buyer.objects.get(email = request.session['buyer_email'])
+        p_obj = Product.objects.get(id = pk)
+        Cart.objects.create(
+            p_name = p_obj.product_name,
+            price = p_obj.price,
+            pic = p_obj.pic,
+            buyer = b_obj
+        )
+        return redirect('index')
+    except:
+        return render(request, 'login.html')
+    
+
+def del_cart_item(request, cart_id):
+    c_obj = Cart.objects.get(id= cart_id)
+    c_obj.delete()
+    return redirect('cart')
+
+
+def cart(request):
+    b_obj = Buyer.objects.get(email = request.session['buyer_email'])
+    my_data = Cart.objects.filter(buyer = b_obj)
+    cccount = total_amount = 0
+    for j in my_data:
+        cccount += 1
+        total_amount += j.price
+
+    return render(request, 'cart.html', {'user_data': b_obj, 'cart_data':my_data, 't_products':cccount, 't_amount':total_amount})

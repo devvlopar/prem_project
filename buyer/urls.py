@@ -13,6 +13,10 @@ urlpatterns = [
     path('logout/', logout, name="logout"),
     path('edit_profile/', edit_profile, name="edit_profile"),
     path('forgot_password/', forgot_password, name="forgot_password"),
+    path('add_to_cart/<int:pk>', add_to_cart, name="add_to_cart"),
+    path('del_cart_item/<int:cart_id>', del_cart_item, name="del_cart_item"),
+
+
 
 
 

@@ -17,3 +17,12 @@ class Buyer(models.Model):
 
     def __str__(self):
         return self.first_name
+
+
+class Cart(models.Model):
+    p_name = models.CharField(max_length=150)
+    price = models.FloatField(default=10.0)
+    pic = models.FileField(upload_to='cart_products', default='sad.jpg')
+    buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE)
+
+    
